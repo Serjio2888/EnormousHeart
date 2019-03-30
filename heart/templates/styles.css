@@ -1,0 +1,36 @@
+.chips {
+    margin: 0.5em !important;
+}
+
+.header_menu {
+    margin-top: 2em !important;
+}
+
+/* body > div:first-child {
+    margin-left: 5em !important;
+} */
+
+.header {
+    margin-bottom: 0.3em !important;
+}
+
+.description {
+    margin-top: 1.5em !important;
+}
+
+.card_header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.started_task {
+    background-color: #98D14F !important;
+}
+
+.in_progress_task {
+    background-color: #D1C14F !important;
+}
+
