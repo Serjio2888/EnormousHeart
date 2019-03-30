@@ -8,6 +8,7 @@ class Event(models.Model): #id добавлен автоматически
     start_time = models.DateTimeField(u'Дата начала')
     end_time = models.DateTimeField(u'Дата окончания')
     hidden = models.BooleanField(u'Скрытый?(False-нет, True-да)',default = False)
+    tags = models.CharField(u'Тэги(через запятую)', max_length=255)
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -38,4 +39,19 @@ class Volonteur(models.Model):
     info = models.TextField(u'Описание', blank=True)
 
     def __str__(self):
-        return '{} '.format(self.info)
+        return '{} {}'.format(self.name, self.info)
+
+class Partner(models.Model):
+    name = models.CharField(u'Имя партнера', max_length=255)
+    inn = models.CharField(u'ИНН', max_length=255,blank=True)
+    web = models.CharField(u'web-сайт', max_length=255,blank=True)
+    mail = models.CharField(u'Mail', max_length=255,blank=True)
+    tags = models.CharField(u'Тэги', max_length=255)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE,blank=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    telephone = models.CharField(u'телефон партнёра', max_length=255,blank=True)
+    #author = models.ForeignKey(u'Привязка к волонтёру',Volonteur, on_delete=models.CASCADE)
+    role = models.TextField(u'Что делает для мероприятия?', blank=True)
+
+    def __str__(self):
+        return '{} {}'.format(self.name, self.event)
