@@ -20,5 +20,8 @@ from heart import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    #path('', views.index),
+    path('', views.auth),
+    path('event/<int:pk>/', views.EventView.as_view()),
+    path('cabinet', views.cabinet)
 ]

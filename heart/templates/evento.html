@@ -1,0 +1,288 @@
+{%load staticfiles%}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="styles.css">
+<script src="main.js"></script>
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function(){
+            $('.ui.dropdown') .dropdown();
+    });
+</script>
+<script src="semantic/dist/semantic.min.js"></script>
+</head>
+<body>
+<!-- ВЕРХНЕЕ МЕНЮ -->
+<div class="ui attached stackable menu header_menu">
+    <div class="ui container" id="main_menu">
+        <a class="item" id="events">
+<head>
+<meta charset="utf-8">
+<title>Huge heart</title>
+<!DOCTYPE html>
+<html>
+
+                    {% for event in ev %}
+                <li><a id="kerch" type="submit" href="/event/{{ event.pk }}">{{ event.name }} </a></li>	
+
+        {% endfor %}
+        
+                    <div class="right item">
+                    <div class="ui dropdown icon item">
+                        <img class="ui avatar image" src="{% static '/images/avatar/Karim.jpg' %}" id="user_photo">
+                        <div class="menu">
+                            <div class="item" id="profile">
+                                Профиль
+                            </div>
+                            <div class="item" id="log_out">
+                                Выйти
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui segment">
+            <!-- РАБОТА С МЕРОПРИЯТИЕМ -->
+            <div class="ui top attached menu">
+                    <div class="ui dropdown icon item">
+                        <i class="edit icon"></i>
+                        <div class="menu">
+                            <div class="item" id="add_event">
+                                Добавить
+                            </div>
+                            <div class="item" id="delete_event">
+                                Удалить
+                            </div>
+                            <div class="item" id="update_event">
+                                Удалить
+                            </div>
+                        </div>
+                    </div>
+                    <!-- EVENT LIST -->
+                    <div class="event_list" id="event_list">
+                        <div class="ui label chips">
+                                Сракатон 2к19
+                        </div>
+                    </div>
+                    <div class="right menu">
+                        <div class="ui right aligned category search item">
+                        <div class="ui transparent icon input">
+                            <input class="prompt" type="text" placeholder="Поиск мероприятий..." id="event_search">
+                            <i class="search link icon"></i>
+                        </div>
+                        <div class="results"></div>
+                        </div>
+                    </div>
+            </div>
+        
+            <div class="ui bottom attached segment">
+                <div class="ui grid">
+                    <div class="ten wide column">
+                        <div class="ui segment">
+                        <!-- СПИСОК ЗАДАЧ -->
+                        <h2 class="ui header">Задачи</h2>
+                        <div class="ui secondary segment" id="month_task_container">
+                            <div class="task_wrapper">
+                                <!-- САМ СПИСОК -->
+                                <div class="ui card started_task" id="task" id="123239">
+                                    <div class="content">
+                                    <div class="card_header">
+                                        <h4 class="ui header" id="task_header_name">Найти Карима строителя</h4>
+                                        <div class="ui icon top left pointing dropdown button">
+                                                <i class="edit icon"></i>
+                                                <div class="menu">
+                                                    <div class="item">Редактировать</div>
+                                                    
+                                                    <div class="item">Добавить заметку</div>
+                                            
+                                                    <div class="item">Удалить</div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                        <div class="meta">
+                                        <span class="right floated time">1 марта - 2 апреля</span>
+                                        <span class="category">НАЧАТО</span>
+                                        </div>
+                                        <div class="description">
+                                        <p>Найти Карима, который очень сильный и большой.
+                                            Как гора. Но не простая, а золотая, как говно. 
+                                            Лучшее говно, как известно, в голове. А голова в яйце. 
+                                            яйцо в пахе, а пах на лице. Это загадка. Ты - лох.
+                                        </p>
+                                        </div>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="right floated author">
+                                        <img class="ui avatar image" src="/images/avatar/Karim.jpg"> Карим
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui card started_task" id="task" id="123239">
+                                        <div class="content">
+                                        <div class="card_header">
+                                            <h4 class="ui header" id="task_header_name">Найти Карима строителя</h4>
+                                            <div class="ui icon top left pointing dropdown button">
+                                                    <i class="edit icon"></i>
+                                                    <div class="menu">
+                                                        <div class="item">Редактировать</div>
+                                                        
+                                                        <div class="item">Добавить заметку</div>
+                                                
+                                                        <div class="item">Удалить</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                            <div class="meta">
+                                            <span class="right floated time">1 марта - 2 апреля</span>
+                                            <span class="category">НАЧАТО</span>
+                                            </div>
+                                            <div class="description">
+                                            <p>Найти Карима, который очень сильный и большой.
+                                                Как гора. Но не простая, а золотая, как говно. 
+                                                Лучшее говно, как известно, в голове. А голова в яйце. 
+                                                яйцо в пахе, а пах на лице. Это загадка. Ты - лох.
+                                            </p>
+                                            </div>
+                                        </div>
+                                        <div class="extra content">
+                                            <div class="right floated author">
+                                            <img class="ui avatar image" src="/images/avatar/Karim.jpg"> Карим
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="ui card started_task" id="task" id="123239">
+                                        <div class="content">
+                                        <div class="card_header">
+                                            <h4 class="ui header" id="task_header_name">Найти Карима строителя</h4>
+                                            <div class="ui icon top left pointing dropdown button">
+                                                    <i class="edit icon"></i>
+                                                    <div class="menu">
+                                                        <div class="item">Редактировать</div>
+                                                        
+                                                        <div class="item">Добавить заметку</div>
+                                                
+                                                        <div class="item">Удалить</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                            <div class="meta">
+                                            <span class="right floated time">1 марта - 2 апреля</span>
+                                            <span class="category">НАЧАТО</span>
+                                            </div>
+                                            <div class="description">
+                                            <p>Найти Карима, который очень сильный и большой.
+                                                Как гора. Но не простая, а золотая, как говно. 
+                                                Лучшее говно, как известно, в голове. А голова в яйце. 
+                                                яйцо в пахе, а пах на лице. Это загадка. Ты - лох.
+                                            </p>
+                                            </div>
+                                        </div>
+                                        <div class="extra content">
+                                            <div class="right floated author">
+                                            <img class="ui avatar image" src="/images/avatar/Karim.jpg"> Карим
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                                        
+                        </div>
+                        </div>
+                </div>
+                <div class="six wide column">
+                    <div class="ui segments">
+                        <div class="ui segment" id="notifications">
+                        <!-- СПИСОК УВЕДОМЛЕНИЙ -->
+                        <h2 class="ui header">Уведомления</h2>
+                        </div>
+                        <div class="ui secondary segment" id="notifications_container">
+                            <div class="ui card" id="notification" id="123239">
+                                <div class="content">
+                                <div class="card_header">
+                                    <h4 class="ui header">Найти Карима строителя</h4>
+                                    <div class="ui icon top left pointing dropdown button">
+                                        <i class="edit icon"></i>
+                                        <div class="menu">
+                                            <div class="item">Решено</div>
+                                            <div class="item">Ответить</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="meta">
+                                    </div>
+                                    <div class="description">
+                                    <p>Карима не нашли.
+                                    </p>
+                                    </div>
+                                </div>
+                                <div class="extra content">
+                                    <div class="right floated author">
+                                    <img class="ui avatar image" src="/images/avatar/Karim.jpg"> Карим
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui card" id="notification" id="123239">
+                                    <div class="content">
+                                    <div class="card_header">
+                                        <h4 class="ui header">Найти Карима строителя</h4>
+                                        <div class="ui icon top left pointing dropdown button">
+                                            <i class="edit icon"></i>
+                                            <div class="menu">
+                                                <div class="item">Решено</div>
+                                                <div class="item">Ответить</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="meta">
+                                        </div>
+                                        <div class="description">
+                                        <p>Карима не нашли.
+                                        </p>
+                                        </div>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="right floated author">
+                                        <img class="ui avatar image" src="/images/avatar/Karim.jpg"> Карим
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="ui card" id="notification" id="123239">
+                                    <div class="content">
+                                    <div class="card_header">
+                                        <h4 class="ui header">Найти Карима строителя</h4>
+                                        <div class="ui icon top left pointing dropdown button">
+                                            <i class="edit icon"></i>
+                                            <div class="menu">
+                                                <div class="item">Решено</div>
+                                                <div class="item">Ответить</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="meta">
+                                        </div>
+                                        <div class="description">
+                                        <p>Карима не нашли.
+                                        </p>
+                                        </div>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="right floated author">
+                                        <img class="ui avatar image" src="/images/avatar/Karim.jpg"> Карим
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        
+              
+        </body>
+        </html>

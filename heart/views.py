@@ -3,10 +3,68 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.http import HttpResponse
 
-from heart.models import Event
+from heart.models import Event, Task, Partner
 from heart.forms import EventForm
 
-def index(request):
+from django.contrib.auth.models import User
 
+
+def authenticate(username=None, password=None):
+        try:
+            user = User.objects.get(username=username)
+            return user
+        except User.DoesNotExist:
+            return None
+        
+def auth(reguest): 
+    if reguest.POST:
+        email = reguest.POST.get("email")
+        password = reguest.POST.get("password")
+        user = authenticate(email,password)
+        context = {}
+        if user:
+            context['event'] = Event.objects.get(id=1)
+            context['partner'] = Partner.objects.all()
+            context['ev'] = Event.objects.all()
+            context['tasks'] = Task.objects.all()
+            if user.groups.filter(name='Volonters').exists():
+                context['type']='vol'
+                return render(reguest, 'event.html', context)
+            if user.groups.filter(name='Organizator').exists():
+                context['type']='org'
+                return render(reguest, 'event.html', context)
+            else:
+                context['type']='noob'
+                return render(reguest, 'event.html', context)
+            
+    context = {}
+    return render(reguest, 'auth.html', context)
+
+
+        
+
+def cabinet(reguest):
+    return render(reguest,'cabinet.html',{})
+
+#def index(request):
+
+#    context = {	'ev': Event.objects.all(), 'name': 'admin'}
+#    return render(request, 'index.html', context)
+
+def event(request):
+    if request.POST:
+        print(request.POST)
     context = {	'name': 'admin'}
-    return render(request, 'index.html', context)
+    return render(request, 'event.html', context)
+
+class EventView(DetailView):
+    model = Event
+    template_name = 'event.html'
+        
+    def get_context_data(self, **kwargs):
+        ev = Event.objects.all()
+        context = super().get_context_data(**kwargs)
+        context['partner'] = Partner.objects.all()
+        context['ev'] = Event.objects.all()
+        context['tasks'] = Task.objects.all()
+        return context

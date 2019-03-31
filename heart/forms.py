@@ -4,12 +4,12 @@ from heart.models import Event, Task, Notification, Partner
 class EventForm(ModelForm):
 	class Meta:
 		model = Event
-		fields = ['name', 'desc']
+		fields = ['name', 'desc', 'partner']
 
 class TaskForm(ModelForm):
 	class Meta:
 		model = Task
-		fields = ['name', 'todo', 'event']
+		fields = ['name', 'todo', 'event', 'partner']
 
 class NotificationForm(ModelForm):
 	class Meta:
@@ -19,4 +19,4 @@ class NotificationForm(ModelForm):
 class PartnerForm(ModelForm):
 	class Meta:
 		model = Partner
-		fields = ['task', 'name', 'inn','web','mail','tags','telephone', 'event', 'role']
+		fields = ['name', 'inn','web','mail','tags','telephone', 'role']

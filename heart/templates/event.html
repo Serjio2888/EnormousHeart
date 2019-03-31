@@ -1,0 +1,193 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Huge heart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'semantic.min.css' %}" />
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function(){
+                $('.ui.dropdown') .dropdown();
+        });
+    </script>
+    <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+</head>
+<body>
+    <!-- ВЕРХНЕЕ МЕНЮ -->
+    <div class="ui attached stackable menu header_menu">
+        <div class="ui container" id="main_menu">
+            <a class="item" id="events">
+                Мероприятия
+            </a>
+            <a class="item" id="scolarshipers">
+                Спонсоры
+            </a>
+            <a class="item" id="events">{{event.name}}</a>
+            
+
+            <div class="right item">
+            <div class="ui dropdown icon item">
+                <img class="ui avatar image" src="{% static '/images/avatar/Karim.jpg' %}" id="user_photo">
+                
+                <div class="menu">
+                   
+                    <div class="item" id="profile">
+                        Профиль
+                    </div>
+                    <div class="item" id="log_out">
+                        Выйти
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+    <!-- РАБОТА С МЕРОПРИЯТИЕМ -->
+    <div class="ui top attached menu">
+        <div style="margin: 0.3em;">
+            <div class="ui buttons">
+                <button class="ui button "><i class="plus square outline icon"></i></button>
+                <button class="ui button "><i class="edit icon"></i></button>
+                <button class="ui button "><i class="trash alternate outline icon"></i></button>
+            </div>
+        </div>
+        
+        <!-- EVENT LIST -->
+        <div class="event_list" id="event_list">
+    
+    {% for event in ev %}
+           
+            {%if event.hidden %}
+            
+            {% else %}
+            <div class="ui label chips">
+                    <a type="submit" href="/event/{{ event.pk }}">{{ event.name }} </a>
+                </div>
+            
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <div class="right menu">
+            <div class="ui right aligned category search item">
+            <div class="ui transparent icon input">
+                <input class="prompt" type="text" placeholder="Поиск мероприятий..." id="event_search">
+                <i class="search link icon"></i>
+            </div>
+            <div class="results"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui bottom attached segment">
+        <div class="ui grid">
+            <div class="ten wide column">
+                <div class="ui segment">
+                <!-- СПИСОК ЗАДАЧ -->
+                <h2 class="ui header">Задачи</h2>
+                <div class="ui secondary segment" id="month_task_container">
+                    <div class="task_wrapper">
+                        <!-- САМ СПИСОК -->
+                        {% for task in tasks %}
+                        {% if task.event == event %}
+                        <div class="ui card started_task" id="task" id="123239">
+                            <div class="content">
+                            <div class="card_header">
+                                <h4 class="ui header" id="task_header_name">{{task.name}}</h4>
+                            </div>
+                                <div class="meta">
+                                <span class="right floated time">1 марта - 2 апреля</span>
+                                <span class="category">НАЧАТО</span>
+                                </div>
+                                <div class="description">
+                                <p>{{task.todo}}
+                                </p>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="right floated author">
+                                <img class="ui avatar image" src="{% static '/images/avatar/Karim.jpg' %}"> Карим
+                                </div>
+                                <div style="margin: 0.3em;">
+                                    <div class="ui buttons">
+                                            <button class="mini ui button"><i class="edit icon"></i></button>
+                                            <button class="mini ui button"><i class="trash alternate outline icon"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                        <button class="ui button" style="height: 3em; margin: 9em;">
+                            Добавить
+                        </button>
+                    </div>
+                                
+                </div>
+                </div>
+        </div>
+        <div class="six wide column">
+            <div class="ui segments">
+                <div class="ui segment" id="notifications">
+                <!-- Мероприятие -->
+                <h2 class="ui header">Мероприятие</h2>
+                <h3 class="ui header">{{event.name}}</h3>
+                </div>
+                <div class="ui secondary segment" id="notifications_container">
+                    <div class="ui card" id="notification" id="123239">
+                        <div class="content">
+                        <div class="card_header">
+                            <h4 class="ui header">{{task.name}}</h4>
+                        </div>
+                        <div class="meta">
+                            </div>
+                            <div class="description">
+                            <p>{{event.desc}}
+                            </p>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="right floated author">
+                            
+                            </div>
+                            <div style="margin: -0.3em;">
+                                <div class="ui buttons">
+                                    <button class="mini ui button"><i class="edit icon"></i></button>
+                                    <button class="mini ui button"><i class="trash alternate outline icon"></i></button>
+                                    <button class="mini ui button"><i class="check square outline icon"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                <details><summary><div class="dark_grey">Партнеры</div></summary>
+<p>
+            {{event.partner}}
+            {% for part in partner %}
+            {% if part == event.partner %}
+            hui
+            {% endif %}{% endfor %}
+	</p>
+  </details>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+      
+</body>
+</html>
