@@ -31,18 +31,21 @@ class SponsView(DetailView):
         return context
 
 def func(email, password):
-    print('rofl')
+    
     smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpObj.starttls()
     smtpObj.login('moonheritage@gmail.com','serjio12')
     msg = 'Hello! Welcome to our site! Your password is '+password
     smtpObj.sendmail("moonheritage@gmail.com",email,msg)
 
-def auth(reguest): 
-    if reguest.POST:
-        email = reguest.POST.get("email")
-        password = reguest.POST.get("password")
+def auth(request): 
+    if request.POST:
+
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        
         if '@' in email:
+            print(email)
             func(email, password)
         user = authenticate(email,password)
         context = {}
@@ -53,22 +56,22 @@ def auth(reguest):
             context['tasks'] = Task.objects.all()
             if user.groups.filter(name='Volonters').exists():
                 context['type']='vol'
-                return render(reguest, 'event.html', context)
+                return render(request, 'event.html', context)
             if user.groups.filter(name='Organizator').exists():
                 context['type']='org'
-                return render(reguest, 'event.html', context)
+                return render(request, 'event.html', context)
             else:
                 context['type']='noob'
-                return render(reguest, 'event.html', context)
+                return render(request, 'event.html', context)
             
     context = {}
-    return render(reguest, 'auth.html', context)
+    return render(request, 'auth.html', context)
 
 
         
 
-def cabinet(reguest):
-    return render(reguest,'cabinet.html',{})
+def cabinet(request):
+    return render(request,'cabinet.html',{})
 
 #def index(request):
 
@@ -88,7 +91,7 @@ class EventView(DetailView):
     def get_context_data(self, **kwargs):
         ev = Event.objects.all()
         context = super().get_context_data(**kwargs)
-        context['notif'] = Notification.objects.all()
+        #context['notif'] = Notification.objects.all()
         context['partner'] = Partner.objects.all()
         context['ev'] = Event.objects.all()
         context['tasks'] = Task.objects.all()

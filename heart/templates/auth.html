@@ -16,13 +16,13 @@
     </script>
     <script src="{% static 'semantic.min.css' %}"></script>
 </head>
-<body style="display:flex; flex-flow: column">
-    <div class="ui middle aligned center aligned grid" style="flex: 1 1 30%; align-items: center; margin: 0 30% 0 30%">
-      <div class="column">
+<body >
+    <div class="ui middle aligned center aligned grid" style="margin-top: 8em">
+      <div class="column" style="margin: 0 30% 0 30%">
         <h2 class="ui teal image header">
           <!-- <img src="assets/images/logo.png" class="image"> -->
           <div class="content">
-            Вход на сайт фонда
+            Вход на сайт федерации
           </div>
         </h2>
         <form class="ui large form" method="POST">
@@ -48,7 +48,8 @@
         </form>
     
         <div class="ui message">
-          Ещё не волонтёр?<a type="submit" href="/" name="gets" style="margin-left: 1em;">Зарегистрироваться</a>
+          <div>Ещё не волонтёр?</div>
+          <div><a type="submit" href="/" name="gets" style="margin-left: 1em;">Зарегистрироваться</a></div>
         </div>
       </div>
     </div>
