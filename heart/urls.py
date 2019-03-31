@@ -23,5 +23,7 @@ urlpatterns = [
     #path('', views.index),
     path('', views.auth),
     path('event/<int:pk>/', views.EventView.as_view()),
-    path('cabinet', views.cabinet)
+    path('cabinet', views.cabinet),
+    path('task_add', views.TaskAdd.as_view()),
+    path('spons/<int:pk>/', views.SponsView.as_view())
 ]

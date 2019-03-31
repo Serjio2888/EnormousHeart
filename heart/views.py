@@ -4,10 +4,11 @@ from django.views.generic.edit import CreateView
 from django.http import HttpResponse
 
 from heart.models import Event, Task, Partner
-from heart.forms import EventForm
+from heart.forms import EventForm, TaskForm
 
 from django.contrib.auth.models import User
 
+import smtplib
 
 def authenticate(username=None, password=None):
         try:
@@ -16,10 +17,33 @@ def authenticate(username=None, password=None):
         except User.DoesNotExist:
             return None
         
+      
+
+class SponsView(DetailView):
+    model = Partner
+    template_name = 'spons.html'
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['partner'] = Partner.objects.all()
+        context['ev'] = Event.objects.all()
+        context['tasks'] = Task.objects.all()
+        return context
+
+def func(email, password):
+    print('rofl')
+    smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+    smtpObj.starttls()
+    smtpObj.login('moonheritage@gmail.com','serjio12')
+    msg = 'Hello! Welcome to our site! Your password is '+password
+    smtpObj.sendmail("moonheritage@gmail.com",email,msg)
+
 def auth(reguest): 
     if reguest.POST:
         email = reguest.POST.get("email")
         password = reguest.POST.get("password")
+        if '@' in email:
+            func(email, password)
         user = authenticate(email,password)
         context = {}
         if user:
@@ -64,7 +88,16 @@ class EventView(DetailView):
     def get_context_data(self, **kwargs):
         ev = Event.objects.all()
         context = super().get_context_data(**kwargs)
+        context['notif'] = Notification.objects.all()
         context['partner'] = Partner.objects.all()
         context['ev'] = Event.objects.all()
         context['tasks'] = Task.objects.all()
         return context
+
+class TaskAdd(CreateView):
+    template_name = 'task_add.html'
+    form_class = TaskForm
+
+
+    def get_success_url(self):
+        return ""

@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<h2>добавить задание</h2>
+<div class="ui top attached menu">
+<div class="event_list" id="event_list">
+<form action="{{ request.path }}" method="post">
+	{% csrf_token %}
+	{% for field in form %}
+		<div class="form-group">
+		    {{ field.label_tag }}<br />
+	    {{ field }}
+		</div>
+    {% endfor %}
+	<button type="submit" class="btn btn-primary">Создать задание</button>
+</form>
+</div></div>
+<img src="{% static '/images/avatar/logo.png' %}" style="width: 70%; height: auto; margin-left: 15%" >

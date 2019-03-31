@@ -6,12 +6,15 @@ class Partner(models.Model):
     web = models.CharField(u'web-сайт', max_length=255,blank=True)
     mail = models.CharField(u'Mail', max_length=255,blank=True)
     tags = models.CharField(u'Тэги', max_length=255)
-    telephone = models.CharField(u'телефон партнёра', max_length=255,blank=True)
+    telephone = models.CharField(u'Телефон партнёра', max_length=255,blank=True)
     #author = models.ForeignKey(u'Привязка к волонтёру',Volonteur, on_delete=models.CASCADE)
     role = models.TextField(u'Что делает для мероприятия?', blank=True)
+    status = models.TextField(u'Опишите взаимоотношения с партнёром.', blank=True)
 
     def __str__(self):
         return '{}'.format(self.name)
+
+
 
 class Event(models.Model): #id добавлен автоматически
     name = models.CharField(u'Название мероприятия', max_length=255, default='event')
@@ -28,10 +31,21 @@ class Event(models.Model): #id добавлен автоматически
         return '{}'.format(self.name)
 
 class Task(models.Model):
+    START = 'ST'
+    DOING = 'DO'
+    END = 'EN'
+    CHOICES = (
+        (START, 'НАЧАТА'),
+        (DOING, 'В ПРОЦЕССЕ'),
+        (END, 'ЗАВЕРШЕНА'),
+    )
     name = models.CharField(u'Задача', max_length=255, default='Zadacha')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     todo = models.TextField(u'Описание', blank=True)
     partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
+    progress = models.CharField(u'Прогресс',max_length=2,
+                                      choices=CHOICES,
+                                      default=START)
     end_time = models.DateTimeField(u'Время окончания', blank=True, auto_now=True)
     def __str__(self):
         return '{}'.format(self.name)
@@ -49,7 +63,7 @@ class Notification(models.Model):
 class Volonteur(models.Model):
     name = models.CharField(u'Имя волонтера', max_length=255)
     pass_hash = models.CharField(u'хэш пароля', max_length=255)
-    #event = models.ForeignKey(u'На каком мероприятии', Event, on_delete=models.CASCADE)
+    #event = models.ForeignKey(Event, on_delete=models.CASCADE)
     #add volonteur
     info = models.TextField(u'Описание', blank=True)
 

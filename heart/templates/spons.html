@@ -22,23 +22,20 @@
 <body>
     <!-- ВЕРХНЕЕ МЕНЮ -->
     <div class="ui attached stackable menu header_menu">
-        <div class="ui container" id="main_menu">
-            <a type="button" href=" "class="item" id="events">
-                Мероприятия
+            <div class="ui container" id="main_menu">
+                <a type="button" href=" "class="item" id="events">
+                    Мероприятия
+                </a>
+                {% for spons in partner %}
+               
+               {% if spons == event.partner  %}
+               <a type="submit" href="/spons/{{spons.pk}}" class="item" id="scolarshipers">
+                Спонсоры данного мероприятия
             </a>
-            {% for spons in partner %}
-           
-           {% if spons == event.partner  %}
-           <a type="submit" href="/spons/{{spons.pk}}" class="item" id="scolarshipers">
-            Партнёры
-        </a>
-           {%endif%}
-            
-
-
-            {% endfor %}
-            
-            <a class="item" id="events">{{event.name}}</a>
+               {%endif%}   
+                {% endfor %}
+                
+                <a class="item" id="events">{{event.name}}</a>
             
 
             <div class="right item">
@@ -101,93 +98,44 @@
     <div class="ui bottom attached segment">
         <div class="ui grid">
             <div class="ten wide column">
+                {% for part in partner %}
+                
                 <div class="ui segment">
                 <!-- СПИСОК ЗАДАЧ -->
-                <h2 class="ui header">Задачи</h2>
+                
+                <h2 class="ui header">Информация о партнере {{part}}</h2>
                 <div class="ui secondary segment" id="month_task_container">
-                    <div class="task_wrapper">
-                        <!-- САМ СПИСОК -->
-                        {% for task in tasks %}
-                        {% if task.event == event %}
-                        <div class="ui card started_task" id="task" id="123239">
-                            <div class="content">
-                            <div class="card_header">
-                                <h4 class="ui header" id="task_header_name">{{task.name}}</h4>
-                            </div>
-                                <div class="meta">
-                                <span class="right floated time">{{task.end_time}}</span>
-                                <span class="category">
-                                    {% if task.progress == 'ST' %}
-                                    НАЧАТА
-                                    {% elif task.progress == 'DO' %}
-                                    В ПРОЦЕССЕ
-                                    {% else %}
-                                    ENDED
-                                {% endif %}</span>
-                                </div>
-                                <div class="description">
-                                <p>{{task.todo}}
-                                </p>
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <div class="right floated author">
-                                <img class="ui avatar image" src="{% static '/images/avatar/Hand.png' %}"> {{task.partner}}
-                                </div>
-                                <div style="margin: 0.3em;">
-                                    <div class="ui buttons">
-                                            <button class="mini ui button"><i class="edit icon"></i></button>
-                                            <button class="mini ui button"><i class="trash alternate outline icon"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-
-                        <a type="button" class="ui button" href="/task_add" style="height: 3em; margin: 9em;">
-                            Добавить
-                        </a>
+                    <div >  {%if part.inn%}
+                            <h4 class="ui header"> ИНН: {{part.inn}}</h4>
+                            {%endif%}
+                            {%if part.web%}
+                            <h4 class="ui header"> Веб-сайт партнера: {{part.web}}</h4>
+                            {%endif%}
+                            {%if part.telephone%}
+                            <h4 class="ui header"> Контактный телефон: {{part.telephone}}</h4>
+                            {%endif%}
+                            {%if part.mail%}
+                            <h4 class="ui header"> Контактная почта: {{part.mail}}</h4>
+                            {%endif%}
+                            {%if part.event%}
+                            <h4 class="ui header"> Прикреплен(а) к {{part.event}}</h4>
+                            {%endif%}
+                            {%if part.role%}
+                            <h4 class="ui header"> Выполняет обязанности: {{part.role}}</h4>
+                            {%endif%}
+                            {%if part.status%}
+                            <h4 class="ui header"> Взаимоотношения с патнером: {{part.status}}</h4>
+                            {%endif%}
+                            
+                            <br /><p></p>
                     </div>
                                 
                 </div>
                 </div>
+                {% endfor %}
         </div>
         <div class="six wide column">
             <div class="ui segments">
-                    <div class="ui segment" id="notifications">
-                            <!-- Мероприятие -->
-                            <h2 class="ui header">Уведомления</h2>
-                            </div>
-                            <div class="ui secondary segment" id="notifications_container">
-                                <div class="ui card" id="notification" id="123239">
-                                    <div class="content">
-                                    <div class="card_header">
-                                        <h4 class="ui header">Марк</h4>
-                                    </div>
-                                    <div class="meta">
-                                        </div>
-                                        <div class="description">
-                                        <p>Марк покинул волонтерскую группу
-                                        </p>
-                                        </div>
-                                    </div>
-                                    <div class="extra content">
-                                        <div class="right floated author">
-                                        
-                                        </div>
-                                        <div style="margin: -0.3em;">
-                                            <div class="ui buttons">
-                                                <button class="mini ui button"><i class="edit icon"></i></button>
-                                                <button class="mini ui button"><i class="trash alternate outline icon"></i></button>
-                                                <button class="mini ui button"><i class="check square outline icon"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
                 <div class="ui segment" id="notifications">
                 <!-- Мероприятие -->
                 <h2 class="ui header">Мероприятие</h2>
@@ -237,8 +185,6 @@
     </div>
     </div>
 </div>
-
-
 
 <img src="{% static '/images/avatar/logo.png' %}" style="width: 80%; height: auto; margin-left: 10%" >
       
